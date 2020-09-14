@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BowlingGameTest {
 
     @Test
-    void should_return_sum() {
+    void should_return_sum() throws HitTimesNotEnoughException {
         // given
         BowlingGame bowlingGame = new BowlingGame();
         ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2));
@@ -21,7 +22,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    void should_return_sum_with_at_least_one_spare() {
+    void should_return_sum_with_at_least_one_spare() throws HitTimesNotEnoughException {
         // given
         BowlingGame bowlingGame = new BowlingGame();
         ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(2, 8, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2));
@@ -34,7 +35,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    void should_return_sum_with_at_least_one_strike() {
+    void should_return_sum_with_at_least_one_strike() throws HitTimesNotEnoughException {
         // given
         BowlingGame bowlingGame = new BowlingGame();
         ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(2, 8, 10, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2));
@@ -47,7 +48,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    void should_return_sum_with_tenth_strike() {
+    void should_return_sum_with_tenth_strike() throws HitTimesNotEnoughException {
         // given
         BowlingGame bowlingGame = new BowlingGame();
         ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(2, 8, 10, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 10, 2, 8, 1, 2));
@@ -60,7 +61,7 @@ public class BowlingGameTest {
     }
 
     @Test
-    void should_return_sum_with_all_hit() {
+    void should_return_sum_with_all_hit() throws HitTimesNotEnoughException {
         // given
         BowlingGame bowlingGame = new BowlingGame();
         ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10));
@@ -70,5 +71,17 @@ public class BowlingGameTest {
 
         // then
         assertEquals(300, bowlingGame.getGrade());
+    }
+
+    @Test
+    void should_throw_when_hitTimesNotEnough() {
+        // given
+        BowlingGame bowlingGame = new BowlingGame();
+        ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(1, 2));
+
+        // when & then
+        assertThrows(HitTimesNotEnoughException.class, () -> {
+            bowlingGame.playGame(hitBollNums);
+        });
     }
 }

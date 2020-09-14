@@ -15,12 +15,12 @@ public class BowlingGame {
         res = 0;
     }
 
-    void playGame(ArrayList<Integer> hitBollNums) {
+    void playGame(ArrayList<Integer> hitBollNums) throws HitTimesNotEnoughException {
         initArgs();
         calculateGrade(hitBollNums);
     }
 
-    private void calculateGrade(ArrayList<Integer> hitBollNums) {
+    private void calculateGrade(ArrayList<Integer> hitBollNums) throws HitTimesNotEnoughException {
         for (int i = 0; i < hitBollNums.size(); ++i)
         {
             if (isTimeToStartNewRound()) {
@@ -37,6 +37,8 @@ public class BowlingGame {
             }
             roundNum ++;
         }
+
+        if (gameTimes < 10) throw new HitTimesNotEnoughException();
     }
 
 
@@ -78,3 +80,6 @@ public class BowlingGame {
        return res;
     }
 }
+
+
+class HitTimesNotEnoughException extends Exception {}

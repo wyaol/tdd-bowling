@@ -32,4 +32,17 @@ public class BowlingGameTest {
         // then
         assertEquals(38, bowlingGame.getGrade());
     }
+
+    @Test
+    void should_return_sum_with_at_least_one_strike() {
+        // given
+        BowlingGame bowlingGame = new BowlingGame();
+        ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(2, 8, 10, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2));
+
+        // when
+        bowlingGame.playGame(hitBollNums);
+
+        // then
+        assertEquals(57, bowlingGame.getGrade());
+    }
 }

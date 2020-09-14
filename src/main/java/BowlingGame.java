@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class BowlingGame {
     private final Integer ALL_ROUND_NUM = 2;
     private final Integer ALL_GAME_TIMES = 10;
+    private final Integer MAX_GRADE = 10;
 
     private Integer roundNum;
     private Integer gameTimes;
@@ -30,12 +31,26 @@ public class BowlingGame {
 
             getGrade(hitBollNums.get(i));
 
+            if (ifStrike(hitBollNums.get(i)))  {
+                getStrikeGrade(hitBollNums.get(i+1), hitBollNums.get(i+2));
+                startNewRound();
+                continue;
+            }
             roundNum ++;
         }
     }
 
+
     private void getSpareGrade(Integer hitBollNum) {
         res += hitBollNum;
+    }
+
+    private void getStrikeGrade(Integer hitBollNum1, Integer hitBollNum2) {
+        res += hitBollNum1 + hitBollNum2;
+    }
+
+    private Boolean ifStrike(Integer hitBollNum) {
+        return hitBollNum == 10;
     }
 
     private Boolean ifPrevTimeSpare(Integer prePreHitBollNum, Integer preHitBollNum) {

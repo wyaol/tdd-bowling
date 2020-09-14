@@ -30,7 +30,6 @@ public class BowlingGame {
             if (isTimeEndGame()) break;
 
             getGrade(hitBollNums.get(i));
-
             if (ifStrike(hitBollNums.get(i)))  {
                 getStrikeGrade(hitBollNums.get(i+1), hitBollNums.get(i+2));
                 startNewRound();
@@ -54,7 +53,7 @@ public class BowlingGame {
     }
 
     private Boolean ifPrevTimeSpare(Integer prePreHitBollNum, Integer preHitBollNum) {
-        if (gameTimes < 1) return false;
+        if (gameTimes < 1 || gameTimes >= ALL_GAME_TIMES) return false;
         return preHitBollNum + prePreHitBollNum == 10;
     }
 

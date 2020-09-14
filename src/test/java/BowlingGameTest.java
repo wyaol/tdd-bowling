@@ -45,4 +45,30 @@ public class BowlingGameTest {
         // then
         assertEquals(57, bowlingGame.getGrade());
     }
+
+    @Test
+    void should_return_sum_with_tenth_strike() {
+        // given
+        BowlingGame bowlingGame = new BowlingGame();
+        ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(2, 8, 10, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 10, 2, 8, 1, 2));
+
+        // when
+        bowlingGame.playGame(hitBollNums);
+
+        // then
+        assertEquals(74, bowlingGame.getGrade());
+    }
+
+    @Test
+    void should_return_sum_with_all_hit() {
+        // given
+        BowlingGame bowlingGame = new BowlingGame();
+        ArrayList<Integer> hitBollNums = new ArrayList<>(Arrays.asList(10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10));
+
+        // when
+        bowlingGame.playGame(hitBollNums);
+
+        // then
+        assertEquals(300, bowlingGame.getGrade());
+    }
 }

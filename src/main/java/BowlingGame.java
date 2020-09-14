@@ -20,16 +20,27 @@ public class BowlingGame {
     }
 
     private void calculateGrade(ArrayList<Integer> hitBollNums) {
-        for (Integer hitBollNum: hitBollNums) {
+        for (int i = 0; i < hitBollNums.size(); ++i)
+        {
             if (isTimeToStartNewRound()) {
                 startNewRound();
+                if (ifPrevTimeSpare(hitBollNums.get(i-2), hitBollNums.get(i-1))) getSpareGrade(hitBollNums.get(i));
             }
             if (isTimeEndGame()) break;
 
-            getGrade(hitBollNum);
+            getGrade(hitBollNums.get(i));
 
             roundNum ++;
         }
+    }
+
+    private void getSpareGrade(Integer hitBollNum) {
+        res += hitBollNum;
+    }
+
+    private Boolean ifPrevTimeSpare(Integer prePreHitBollNum, Integer preHitBollNum) {
+        if (gameTimes < 1) return false;
+        return preHitBollNum + prePreHitBollNum == 10;
     }
 
     private void getGrade(Integer hitBollNum) {
